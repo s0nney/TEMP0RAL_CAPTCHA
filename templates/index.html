@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CAPTCHA Challenge</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 2rem auto; }
+        .captcha-box { padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        img { margin: 1rem 0; border: 1px solid #ccc; }
+        input[type="text"] { padding: 8px; margin: 5px 0; }
+        button { padding: 8px 16px; background: #007bff; color: white; border: none; border-radius: 4px; }
+        .error { color: red; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="captcha-box">
+        <h2>Verify You're Human</h2>
+        <form method="POST" action="/validate">
+            <input type="hidden" name="captchaID" value="{{.captchaID}}">
+            <div>
+                <img src="/captcha/image/{{.captchaID}}" alt="CAPTCHA" >
+            </div>
+            <div>
+                <input type="text" name="answer" placeholder="Enter the answer" required>
+            </div>
+            <button type="submit">Verify</button>
+            {{if .error}}
+                <div class="error">{{.error}}</div>
+            {{end}}
+        </form>
+    </div>
+</body>
+</html>
